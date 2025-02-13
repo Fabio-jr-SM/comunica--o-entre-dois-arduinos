@@ -1,3 +1,7 @@
+Aqui está o seu `README.md` ajustado para incluir a imagem do circuito que está em `assets/images/circuito`. Adicionei a imagem usando a sintaxe Markdown e organizei o conteúdo para que a imagem apareça em uma seção apropriada.
+
+---
+
 # Comunicação entre Dois Arduinos com RF 433 MHz
 
 ## Introdução
@@ -5,6 +9,11 @@ A comunicação sem fio entre dispositivos é uma tecnologia amplamente utilizad
 
 ## Funcionamento
 O sistema consiste em dois Arduinos: um transmissor e um receptor. O transmissor possui três botões que representam cores (vermelho, verde e azul). Quando uma sequência de botões é pressionada, um botão de envio deve ser acionado para transmitir os dados ao receptor. No lado receptor, há três LEDs que piscam conforme a ordem em que os botões foram pressionados.
+
+### Diagrama do Circuito
+Abaixo está o diagrama do circuito utilizado no projeto:
+
+![Diagrama do Circuito](assets/images/circuito.png)
 
 ### Componentes Utilizados
 - 2x Arduino Uno
@@ -37,4 +46,3 @@ O sistema consiste em dois Arduinos: um transmissor e um receptor. O transmissor
 
 ## Referência
 [Implementação da comunicação RF 433 MHz com Arduino](https://www.youtube.com/watch?v=ccz_2Q1tMt0)
-
