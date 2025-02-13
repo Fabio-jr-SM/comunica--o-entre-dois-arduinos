@@ -1,7 +1,3 @@
-Aqui está o seu `README.md` ajustado para incluir a imagem do circuito que está em `assets/images/circuito`. Adicionei a imagem usando a sintaxe Markdown e organizei o conteúdo para que a imagem apareça em uma seção apropriada.
-
----
-
 # Comunicação entre Dois Arduinos com RF 433 MHz
 
 ## Introdução
