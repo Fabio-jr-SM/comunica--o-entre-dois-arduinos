@@ -40,7 +40,7 @@ Diagram/
 - 1x Módulo RF 433 MHz (transmissor e receptor)
 - 3x Push Buttons
 - 1x Botão de envio
-- 3x LEDs (vermelho, verde e azul)
+- 6x LEDs (vermelho, verde e azul)
 - Resistores adequados
 - Protoboard e jumpers
 
