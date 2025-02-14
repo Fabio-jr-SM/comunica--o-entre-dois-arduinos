@@ -7,7 +7,11 @@
 
 RH_ASK receptor;
 
-// Função para calcular o CRC8 (mesma do transmissor)
+// Definição de delimitadores para enquadramento
+#define STX 0x02
+#define ETX 0x03
+
+// Função para calcular o CRC8
 uint8_t calcularCRC8(const uint8_t *dados, uint8_t tamanho) {
   uint8_t crc = 0x00;
   for (uint8_t i = 0; i < tamanho; i++) {
@@ -34,28 +38,31 @@ void setup() {
 }
 
 void loop() {
-  uint8_t buf[11];  // Buffer maior para receber dados + CRC
+  uint8_t buf[12];  // Buffer para armazenar a mensagem recebida
   uint8_t buflen = sizeof(buf);
 
   if (receptor.recv(buf, &buflen)) {
-    if (buflen < 2) return; // Mensagem inválida
+    if (buflen < 4 || buf[0] != STX || buf[buflen - 1] != ETX) {
+      Serial.println("Erro: Enquadramento inválido!");
+      return;
+    }
 
-    uint8_t crcRecebido = buf[buflen - 1];  // Último byte é o CRC
-    uint8_t crcCalculado = calcularCRC8(buf, buflen - 1);  // Recalcula o CRC
+    uint8_t crcRecebido = buf[buflen - 2];  
+    uint8_t crcCalculado = calcularCRC8(buf + 1, buflen - 3);  
 
-    // Exibe o CRC recebido e o calculado
     Serial.print("CRC Recebido: ");
     Serial.println(crcRecebido, HEX);
     Serial.print("CRC Calculado: ");
     Serial.println(crcCalculado, HEX);
 
     if (crcCalculado == crcRecebido) {
-      buf[buflen - 1] = '\0';  // Remove o CRC da string
       Serial.print("Mensagem válida recebida: ");
-      Serial.println((char*)buf);
+      for (int i = 1; i < buflen - 2; i++) {
+        Serial.print((char)buf[i]);
+      }
+      Serial.println();
 
-      // Ação com base na sequência recebida
-      for (int i = 0; i < buflen - 1; i++) {
+      for (int i = 1; i < buflen - 2; i++) {
         if (buf[i] == '1') {
           Serial.println("Acendendo LED Verde.");
           digitalWrite(ledVerde, HIGH);
